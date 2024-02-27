@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 app.use(express.json());
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 
 const mongoUrl = "mongodb+srv://admin:admin@cluster0.njeb9m7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
@@ -48,7 +48,7 @@ app.post("/register", async (req, res) => {
 
 app.post('/login-user', async (req, res) => {
     const {email,password} = req.body;
-
+    console.log("email",email,password)
     const oldUser = await User.findOne({ email: email });
     if (!oldUser) {
         return res.send({ data: "User doesn't exist!!" });

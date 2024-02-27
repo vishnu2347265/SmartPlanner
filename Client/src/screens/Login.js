@@ -12,15 +12,14 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit() {
+  const handleSubmit = ()=> {
     console.log(email, password);
     const userData = {
       email: email,
       password,
     };
-
     axios.post('http://0.0.0.0:5001/login-user', userData)
-      .then(res =>{ console.log(res.data);
+      .then((res) =>{ console.log(res.data);
       if(res.data.status == "ok"){
         Alert.alert("logged in successful");
         navigation.navigate('Home');
@@ -45,11 +44,11 @@ function Login() {
           <Text style={styles.text_header}>Login!!!</Text>
           <View style={styles.action}>
             {<FontAwesome name="user-o" color="#420475" style={styles.smallIcon} />}
-            <TextInput placeholder='Mobile or Email' style={styles.textInput} />
+            <TextInput placeholder='Mobile or Email' style={styles.textInput} onChangeText={(e)=>setEmail(e)} />
           </View>
           <View style={styles.action}>
             {<FontAwesome name="lock" color="#420475" style={styles.smallIcon} />}
-            <TextInput placeholder='Password' style={styles.textInput} />
+            <TextInput placeholder='Password' style={styles.textInput} onChangeText={(e)=>setPassword(e)} />
           </View>
           <View
             style={{
@@ -64,7 +63,7 @@ function Login() {
           </View>
         </View>
         <View style={styles.button}>
-          <TouchableOpacity style={styles.inBut} onPress={() => handleSubmit()}>
+          <TouchableOpacity style={styles.inBut} onPress={handleSubmit}>
             <View>
               <Text style={styles.textSign}>Log in</Text>
             </View>
